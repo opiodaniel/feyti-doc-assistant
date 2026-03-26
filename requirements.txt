@@ -27,6 +27,7 @@ pycparser==3.0
 pydantic==2.12.5
 pydantic_core==2.41.5
 pyparsing==3.3.2
+python-dotenv==1.2.2
 requests==2.33.0
 sqlparse==0.5.5
 tqdm==4.67.3
