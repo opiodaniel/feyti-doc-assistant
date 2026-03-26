@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Upload, FileText, User, AlignLeft, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 const API_BASE_URL = import.meta.env.VITE_DJANGO_API_URL || 'http://localhost:8000/api';
+console.log(API_BASE_URL);
 
 function App() {
   const [file, setFile] = useState(null);
@@ -46,6 +47,7 @@ function App() {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(response);
       setData(response.data);
     } catch (err) {
       setError(err.response?.data?.error || "Something went wrong while analyzing the document.");
