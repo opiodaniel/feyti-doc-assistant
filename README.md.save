@@ -1,0 +1,32 @@
+# AI-Powered Document Assistant
+
+A full-stack application that allows users to upload PDF documents and receive an AI-generated summary, identifying the title, author, and key sections using the Google Gemini LLM.
+
+## 🚀 Features
+- **PDF Text Extraction:** Uses `pdfminer.six` to process and extract text from uploaded documents.
+- **AI Summarization:** Integrates with **Gemini 1.5 Flash** for high-speed, structured document analysis.
+- **RESTful API:** Built with Django Rest Framework (DRF).
+- **Modern UI:** Built with React.js and Tailwind CSS (Frontend currently in development).
+
+---
+
+## 🛠️ Tech Stack
+- **Backend:** Python, Django, Django Rest Framework
+- **AI:** Google Generative AI (Gemini API)
+- **Frontend:** React.js
+- **Environment:** Ubuntu Linux
+
+---
+
+## ⚙️ Setup and Installation
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/opiodaniel/feyti-doc-assistant.git](https://github.com/opiodaniel/feyti-doc-assistant.git)
+cd feyti-doc-assistant
+
+  2. Backend Setup
+   Create and activate a virtual environment:
+    python3 -m venv venv
+    source venv/bin/activate
+
