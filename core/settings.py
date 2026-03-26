@@ -26,7 +26,7 @@ if env_path.exists():
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY") or os.environ.get("DJANGO_SECRET_KEY") or 'django-insecure-prod-safe-fallback'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('RENDER') is None
 
 
 # Application definition
@@ -41,15 +41,13 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'analyzer',
-
-
 ]
 
 # --- CORS Configuration ---
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
-    "feyti-doc-assistant.vercel.app",
+    "https://feyti-doc-assistant.vercel.app",
     os.environ.get('FRONTEND_URL', 'http://localhost:5173'),
 ]
 
