@@ -9,8 +9,19 @@ function App() {
   const [error, setError] = useState(null);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    setError(null);
+    const selectedFile = e.target.files[0];
+    const allowedTypes = [
+      'application/pdf',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    ];
+
+    if (selectedFile && !allowedTypes.includes(selectedFile.type)) {
+      setError("Invalid file type. Please select a PDF or Word (.docx) file.");
+      setFile(null); // Reset the file state
+    } else {
+      setFile(selectedFile);
+      setError(null); // Clear any previous errors
+    }
   };
 
   const handleUpload = async () => {
@@ -59,7 +70,7 @@ function App() {
               onChange={handleFileChange}
               className="hidden"
               id="fileInput"
-              accept=".pdf"
+              accept=".pdf, .docx, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             />
             <label htmlFor="fileInput" className="cursor-pointer text-indigo-600 font-semibold hover:underline">
               {file ? file.name : "Click to upload a PDF document"}
