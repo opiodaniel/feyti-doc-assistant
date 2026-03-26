@@ -28,10 +28,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '*',
-]
-
 
 # Application definition
 
@@ -55,6 +51,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     os.environ.get('FRONTEND_URL', 'http://localhost:5173'),
 ]
+
+# Security setting for production host (CRITICAL)
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
