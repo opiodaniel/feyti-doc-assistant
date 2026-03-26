@@ -13,7 +13,7 @@ Django==5.2.12
 django-cors-headers==4.9.0
 djangorestframework==3.17.1
 google-ai-generativelanguage==0.6.15
-google-api-core==2.30.0
+google-api-core
 google-api-python-client==2.193.0
 google-auth==2.49.1
 google-auth-httplib2==0.3.0
