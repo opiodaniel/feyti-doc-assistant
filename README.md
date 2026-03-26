@@ -4,7 +4,7 @@ A full-stack application that allows users to upload PDF documents and receive a
 
 ## 🚀 Features
 - **PDF Text Extraction:** Uses `pdfminer.six` to process and extract text from uploaded documents.
-- **AI Summarization:** Integrates with **Gemini 1.5 Flash** for high-speed, structured document analysis.
+- **AI Summarization:** Integrates with **gemini-2.5-flash** for high-speed, structured document analysis.
 - **RESTful API:** Built with Django Rest Framework (DRF).
 - **Modern UI:** Built with React.js and Tailwind CSS (Frontend currently in development).
 
