@@ -1,0 +1,1 @@
+web: gunicorn feyti-doc-assistant.asgi:application
