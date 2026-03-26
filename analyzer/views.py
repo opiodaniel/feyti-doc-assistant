@@ -29,14 +29,18 @@ class DocumentAnalyzeView(APIView):
             clean_text = text[:10000]
 
             # 2. Call Gemini AI
-            model = genai.GenerativeModel('gemini-1.5-flash')
-            prompt = f"""
-            Analyze the following text from a document. 
-            Return the response strictly as a JSON object with the following keys:
-            "title", "author", "summary", and "key_points".
+            try:
+                model = genai.GenerativeModel('gemini-2.5-flash')
+            except:
+                model = genai.GenerativeModel('gemini-pro')
 
-            Text: {clean_text}
-            """
+            prompt = f"""
+                    Analyze the following text from a document. 
+                    Return the response STRICTLY as a JSON object with these keys:
+                    "title", "author", "summary", "key_points".
+    
+                    Text: {clean_text}
+                    """
 
             response = model.generate_content(prompt)
 
