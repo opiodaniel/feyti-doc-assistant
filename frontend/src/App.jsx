@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Upload, FileText, User, AlignLeft, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
+const API_BASE_URL = import.meta.env.VITE_DJANGO_API_URL || 'http://localhost:8000/api';
+
 function App() {
   const [file, setFile] = useState(null);
   const [data, setData] = useState(null);
@@ -39,7 +41,7 @@ function App() {
 
     try {
       // Pointing to your Django backend
-      const response = await axios.post('http://127.0.0.1:8000/api/analyze/', formData, {
+      const response = await axios.post(`${API_BASE_URL}/analyze/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
