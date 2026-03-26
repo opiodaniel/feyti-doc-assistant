@@ -1,1 +1,1 @@
-web: gunicorn feyti-doc-assistant.asgi:application
+web: gunicorn core.wsgi
