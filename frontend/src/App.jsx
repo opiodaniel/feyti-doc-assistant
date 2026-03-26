@@ -41,7 +41,7 @@ function App() {
 
     try {
       // Pointing to your Django backend
-      const response = await axios.post(`${API_BASE_URL}/analyze`, formData, {
+      const response = await axios.post(`${API_BASE_URL}/analyze/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
