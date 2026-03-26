@@ -33,8 +33,9 @@ cd feyti-doc-assistant
    2. Install dependencies:
         pip install -r requirements.txt
    
-   3. Create a .env file in the root directory and add your API key:
+   3. Create a .env file in the root directory and add your API key and Django Secret Key:
         GEMINI_API_KEY=your_google_gemini_api_key_here
+        SECRET_KEY=your django secret key
         
 3. Running the Server
    python manage.py migrate
