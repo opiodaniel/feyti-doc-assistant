@@ -52,10 +52,3 @@ requirements.txt: Python dependencies.
 Opio Daniel - Full Stack Developer
 
 ---
-### **Push to GitHub**
-This is a great moment to show you are thinking about the "Extra Points" mentioned in the assignment.
-
-```bash
-git add README.md
-git commit -m "Docs: Added comprehensive README with setup instructions"
-git push
