@@ -1,8 +1,33 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Upload, FileText, User, AlignLeft, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import {
+  Upload,
+  FileText,
+  User,
+  AlignLeft,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+  Info,
+  Clock
+} from 'lucide-react';
 
-const API_BASE_URL = import.meta.env.VITE_DJANGO_API_URL || 'http://localhost:8000/api';
+/**
+ * Accessing environment variables safely for different target environments.
+ * We use a fallback check to ensure import.meta doesn't cause build warnings.
+ */
+const getApiBaseUrl = () => {
+  try {
+    if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_DJANGO_API_URL) {
+      return import.meta.env.VITE_DJANGO_API_URL;
+    }
+  } catch (e) {
+    // Fallback if import.meta is not supported by the environment
+  }
+  return 'http://localhost:8000/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 function App() {
   const [file, setFile] = useState(null);
@@ -19,10 +44,10 @@ function App() {
 
     if (selectedFile && !allowedTypes.includes(selectedFile.type)) {
       setError("Invalid file type. Please select a PDF or Word (.docx) file.");
-      setFile(null); // Reset the file state
+      setFile(null);
     } else {
       setFile(selectedFile);
-      setError(null); // Clear any previous errors
+      setError(null);
     }
   };
 
@@ -40,7 +65,6 @@ function App() {
     formData.append('file', file);
 
     try {
-      // Pointing to your Django backend
       const response = await axios.post(`${API_BASE_URL}/analyze/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -58,10 +82,25 @@ function App() {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <header className="text-center mb-12">
+        <header className="text-center mb-10">
           <h1 className="text-4xl font-extrabold text-indigo-600 mb-2">Feyti DocAssistant</h1>
           <p className="text-slate-600">AI-Powered Document Summarization & Analysis</p>
         </header>
+
+        {/* Deployment Note */}
+        <div className="mb-8 bg-indigo-50 border border-indigo-100 rounded-xl p-4 flex items-start gap-4 shadow-sm">
+          <div className="bg-white p-2 rounded-full shadow-sm text-indigo-600 shrink-0">
+            <Info className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 className="text-sm font-bold text-indigo-900 mb-1">Service Performance Note</h4>
+            <p className="text-xs text-indigo-800 leading-relaxed">
+              This system is currently utilizing Render's free tier for the backend service.
+              If the system has been inactive, the server may require up to <span className="font-bold underline decoration-indigo-300">50 seconds</span> to spin up and process your first request.
+              Subsequent interactions will be significantly faster. Thank you for your patience.
+            </p>
+          </div>
+        </div>
 
         {/* Upload Section */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 mb-8">
@@ -75,7 +114,7 @@ function App() {
               accept=".pdf, .docx, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             />
             <label htmlFor="fileInput" className="cursor-pointer text-indigo-600 font-semibold hover:underline">
-              {file ? file.name : "Click to upload a PDF document"}
+              {file ? file.name : "Click to upload a PDF or Word document"}
             </label>
             <p className="text-xs text-slate-500 mt-2">Maximum file size: 10MB</p>
           </div>
@@ -83,7 +122,7 @@ function App() {
           <button
             onClick={handleUpload}
             disabled={loading || !file}
-            className={`w-full mt-6 py-3 px-6 rounded-lg  cursor-pointer font-bold text-white transition-all flex items-center justify-center gap-2 ${
+            className={`w-full mt-6 py-3 px-6 rounded-lg cursor-pointer font-bold text-white transition-all flex items-center justify-center gap-2 ${
               loading || !file ? 'bg-slate-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700 shadow-md'
             }`}
           >
@@ -97,6 +136,13 @@ function App() {
             )}
           </button>
 
+          {loading && (
+             <div className="mt-4 flex items-center justify-center gap-2 text-indigo-600 animate-pulse text-sm">
+                <Clock className="w-4 h-4" />
+                <span>Generating your report. This may take a moment...</span>
+             </div>
+          )}
+
           {error && (
             <div className="mt-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2">
               <AlertCircle className="w-5 h-5" />
@@ -109,7 +155,6 @@ function App() {
         {data && (
           <div className="space-y-6 animate-in fade-in duration-500">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Title Card */}
               <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                 <div className="flex items-center gap-3 mb-3 text-indigo-600">
                   <FileText className="w-5 h-5" />
@@ -118,7 +163,6 @@ function App() {
                 <p className="text-lg font-semibold text-slate-800">{data.title || "N/A"}</p>
               </div>
 
-              {/* Author Card */}
               <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                 <div className="flex items-center gap-3 mb-3 text-emerald-600">
                   <User className="w-5 h-5" />
@@ -128,7 +172,6 @@ function App() {
               </div>
             </div>
 
-            {/* Summary Card */}
             <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
               <div className="flex items-center gap-3 mb-4 text-amber-600">
                 <AlignLeft className="w-5 h-5" />
@@ -137,7 +180,6 @@ function App() {
               <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">{data.summary}</p>
             </div>
 
-            {/* Key Points */}
             {data.key_points && (
               <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                 <div className="flex items-center gap-3 mb-4 text-purple-600">
