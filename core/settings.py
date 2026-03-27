@@ -47,15 +47,15 @@ INSTALLED_APPS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
-    "https://feyti-doc-assistant.vercel.app",
     os.environ.get('FRONTEND_URL', 'http://localhost:5173'),
 ]
 
 # Security setting for production host (CRITICAL)
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'feyti-doc-assistant.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
