@@ -6,7 +6,7 @@ A full-stack application that allows users to upload PDF documents and receive a
 - **PDF Text Extraction:** Uses `pdfminer.six` to process and extract text from uploaded documents.
 - **AI Summarization:** Integrates with **gemini-2.5-flash** for high-speed, structured document analysis.
 - **RESTful API:** Built with Django Rest Framework (DRF).
-- **Modern UI:** Built with React.js and Tailwind CSS (Frontend currently in development).
+- **Modern UI:** Built with React.js and Tailwind CSS.
 
 ---
 
@@ -36,6 +36,7 @@ cd feyti-doc-assistant
    3. Create a .env file in the root directory and add your API key and Django Secret Key:
         GEMINI_API_KEY=your_google_gemini_api_key_here
         SECRET_KEY=your django secret key
+        FRONTEND_URL=deployed frontend url
         
 3. Running the Server
    python manage.py migrate
