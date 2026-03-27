@@ -200,8 +200,16 @@ function App() {
         )}
       </div>
 
-      <footer className="mt-20 text-center text-slate-400 text-sm border-t border-slate-200 pt-8">
-        Built by <span className="font-bold text-slate-600">Opio Daniel</span> for Feyti Medical Group Internship
+      <footer className="mt-20 text-center text-slate-400 text-sm border-t border-slate-200 pt-8 flex flex-col items-center gap-4">
+        <p>
+          Built by <span className="font-bold text-slate-600">Opio Daniel</span> for Feyti Medical Group Internship
+        </p>
+        <img
+          src="/profile.png"
+          alt="Opio Daniel"
+          className="w-12 h-12 rounded-full border border-slate-200 object-cover shadow-sm"
+          onError={(e) => { e.target.style.display = 'none' }}
+        />
       </footer>
     </div>
   );
